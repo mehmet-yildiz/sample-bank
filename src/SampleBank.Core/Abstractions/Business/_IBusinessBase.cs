@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SampleBank.Core.Abstractions.Business
 {
@@ -9,5 +10,6 @@ namespace SampleBank.Core.Abstractions.Business
         void Delete(TEntity obj);
         TEntity GetById(int id);
         IEnumerable<TEntity> GetAll();
+        bool TransactionalProcess(Action action);
     }
 }
