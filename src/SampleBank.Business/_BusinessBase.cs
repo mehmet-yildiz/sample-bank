@@ -8,36 +8,36 @@ namespace SampleBank.Business
 {
     public class BusinessBase<TEntity> : IBusinessBase<TEntity> where TEntity : class, IEntityKey<int>, new()
     {
-        private readonly IPersistenceBase<TEntity> _persistence;
+        protected readonly IPersistenceBase<TEntity> Persistence;
         protected readonly IUnitOfWork Uow;
         public BusinessBase(IPersistenceBase<TEntity> persistence, IUnitOfWork uow)
         {
-            _persistence = persistence;
+            Persistence = persistence;
             Uow = uow;
         }
 
         public TEntity Insert(TEntity obj)
         {
-            return _persistence.Insert(obj);
+            return Persistence.Insert(obj);
         }
         public TEntity Update(TEntity obj)
         {
-            return _persistence.Update(obj);
+            return Persistence.Update(obj);
         }
 
         public void Delete(TEntity obj)
         {
-            _persistence.Delete(obj);
+            Persistence.Delete(obj);
         }
 
         public TEntity GetById(int id)
         {
-            return _persistence.GetById(id);
+            return Persistence.GetById(id);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _persistence.GetAll();
+            return Persistence.GetAll();
         }
 
         public bool TransactionalProcess(Action action)

@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using SampleBank.Core.Abstractions.Business;
 using SampleBank.Core.Entity;
 
 namespace SampleBank.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -31,10 +33,6 @@ namespace SampleBank.API.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            _userBusiness.Insert(new User() { Name = "mehmet1", Surname = "yildiz" });
-
-            var list = _userBusiness.GetAll();
-
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
