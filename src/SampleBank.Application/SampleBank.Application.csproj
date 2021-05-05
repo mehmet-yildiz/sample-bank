@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SampleBank.Business\SampleBank.Business.csproj" />
+    <ProjectReference Include="..\SampleBank.Core\SampleBank.Core.csproj" />
+    <ProjectReference Include="..\SampleBank.Persistence\SampleBank.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>
