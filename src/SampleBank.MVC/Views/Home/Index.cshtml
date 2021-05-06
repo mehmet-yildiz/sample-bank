@@ -1,0 +1,75 @@
+﻿
+
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">SampleBank Test UI</h1>
+            <p class="lead text-muted">First login and get token. Then invoke other actions.</p>
+            <p>
+                <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button><br />
+
+                <button class="btn btn-outline-info mb-5" data-bs-toggle="modal" data-bs-target="#openAccountModal">Open an Account</button><br />
+
+                <button class="btn btn-outline-warning mb-2" id="btnShowCustomers">Show Customers</button><br />
+                <button class="btn btn-outline-secondary mb-2" id="btnShowAccounts">Show Accounts</button><br />
+                <button class="btn btn-outline-danger mb-2" id="btnShowTransactions">Show Transactions</button><br />
+
+            </p>
+        </div>
+    </div>
+</section>
+
+<hr />
+<section class="container bg-light" id="result-section">
+    
+</section>
+
+
+
+<!-- Modal Login-->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="username" class="form-control" placeholder="Username..." required /><br />
+                <input type="password" id="password" class="form-control" placeholder="Password..." required />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-success" id="login-button">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Open Account-->
+<div class="modal fade" id="openAccountModal" tabindex="-1" aria-labelledby="openAccountModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="openAccountModalLabel">Open Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="customerId" class="form-control" placeholder="Customer Id (1 to 5)" required /><br />
+                <input type="number" id="initialCredit" class="form-control" placeholder="Initial credit..." required />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-success" id="btnOpenAccount">Open Account</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/js/index.js"></script>
+}
+
