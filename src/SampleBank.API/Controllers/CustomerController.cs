@@ -7,21 +7,21 @@ using SampleBank.Core.Entity;
 
 namespace SampleBank.API.Controllers
 {
-    public class TransactionController : SecureController
+    public class CustomerController : SecureController
     {
-        private readonly IBusinessTransaction _transactionService;
+        private readonly IBusinessCustomer _customerService;
 
-        public TransactionController(IBusinessTransaction transactionService)
+        public CustomerController(IBusinessCustomer customerService)
         {
-            _transactionService = transactionService;
+            _customerService = customerService;
         }
 
 
         [HttpGet("list")]
-        public ApiResponse<IEnumerable<Transaction>> GetTransactions()
+        public ApiResponse<IEnumerable<Customer>> GetCustomers()
         {
-            var apiResponse = new ApiResponse<IEnumerable<Transaction>>();
-            var serviceResponse = _transactionService.GetAll();
+            var apiResponse = new ApiResponse<IEnumerable<Customer>>();
+            var serviceResponse = _customerService.GetAll();
 
             if (serviceResponse.HasError)
             {

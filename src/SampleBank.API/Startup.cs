@@ -73,6 +73,11 @@ namespace SampleBank.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SampleBank.API v1"));
             }
 
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -86,10 +91,6 @@ namespace SampleBank.API
                 endpoints.MapControllers();
             });
 
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SampleBank.API.Model;
 using SampleBank.Core.Abstractions.Business;
@@ -49,7 +50,7 @@ namespace SampleBank.API.Controllers
                 return apiResponse;
             }
 
-            apiResponse.Data = serviceResponse.Data;
+            apiResponse.Data = serviceResponse.Data.OrderByDescending(x => x.Id);
             return apiResponse;
         }
     }

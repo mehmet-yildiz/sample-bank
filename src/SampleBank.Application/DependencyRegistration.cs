@@ -18,6 +18,7 @@ namespace SampleBank.Application
             services.AddScoped<IBusinessUser, BusinessUser>();
             services.AddScoped<IBusinessTransaction, BusinessTransaction>();
             services.AddScoped<IBusinessAccount, BusinessAccount>();
+            services.AddScoped<IBusinessCustomer, BusinessCustomer>();
             services.AddScoped<IUnitOfWork, EfUnitOfWork>();
 
             services.AddScoped<DbContext, EfContext>();

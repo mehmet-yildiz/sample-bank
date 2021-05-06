@@ -7,13 +7,13 @@
             <h1 class="fw-light">SampleBank Test UI</h1>
             <p class="lead text-muted">First login and get token. Then invoke other actions.</p>
             <p>
-                <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button><br />
+                <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#loginModal" id="btnLogin">Login</button><br />
 
                 <button class="btn btn-outline-info mb-5" data-bs-toggle="modal" data-bs-target="#openAccountModal">Open an Account</button><br />
 
-                <button class="btn btn-outline-warning mb-2" id="btnShowCustomers">Show Customers</button><br />
-                <button class="btn btn-outline-secondary mb-2" id="btnShowAccounts">Show Accounts</button><br />
-                <button class="btn btn-outline-danger mb-2" id="btnShowTransactions">Show Transactions</button><br />
+                <button class="btn btn-outline-warning mr-2" id="btnShowCustomers">Show Customers</button>
+                <button class="btn btn-outline-secondary mr-2" id="btnShowAccounts">Show Accounts</button>
+                <button class="btn btn-outline-danger" id="btnShowTransactions">Show Transactions</button>
 
             </p>
         </div>
@@ -57,7 +57,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="text" id="customerId" class="form-control" placeholder="Customer Id (1 to 5)" required /><br />
+                <input type="text" id="customerId" class="form-control" placeholder="Customer Id (1 or 2)" required /><br />
                 <input type="number" id="initialCredit" class="form-control" placeholder="Initial credit..." required />
             </div>
             <div class="modal-footer">
