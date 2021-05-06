@@ -1,20 +1,20 @@
 <template>
-  <HelloWorld msg="Thank you for using our product. We're glad you're with us."/>
+    <div id="app">
+        <Home msg="Hello world!" />
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+    import Home from './components/Home.vue';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        name: 'app',
+        components: {
+            Home
+        }
+    };
 </script>
 
 <style>
-#app {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-}
 </style>
+

@@ -2,20 +2,17 @@
   "name": "sample-bank.vue",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
   "description": "SampleBank.Vue",
   "author": {
     "name": ""
   },
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "start": "vue-cli-service serve --open"
-  },
   "dependencies": {
-    "mdb-vue-ui-kit": "^1.0.0-beta4",
-    "vue": "2.5.17",
-    "vue-router": "^4.0.6"
+    "vue": "2.5.17"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.0.4",
@@ -23,7 +20,6 @@
     "@vue/cli-service": "3.0.4",
     "eslint": "5.6.0",
     "eslint-plugin-vue": "4.7.1",
-    "vue-cli-plugin-mdb5": "~1.2.0",
     "vue-template-compiler": "2.5.17"
   },
   "eslintConfig": {
