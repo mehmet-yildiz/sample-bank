@@ -22,14 +22,14 @@ namespace SampleBank.Application
             services.AddScoped<IUnitOfWork, EfUnitOfWork>();
 
             services.AddScoped<DbContext, EfContext>();
-            services.AddScoped<IPersistenceUser, PersistenceUser>();
-            services.AddScoped<IPersistenceAccount, PersistenceAccount>();
-            services.AddScoped<IPersistenceTransaction, PersistenceTransaction>();
-            services.AddScoped<IPersistenceCustomer, PersistenceCustomer>();
-            services.AddScoped<IPersistenceBase<User>, PersistenceBase<User>>();
-            services.AddScoped<IPersistenceBase<Account>, PersistenceBase<Account>>();
-            services.AddScoped<IPersistenceBase<Transaction>, PersistenceBase<Transaction>>();
-            services.AddScoped<IPersistenceBase<Customer>, PersistenceBase<Customer>>();
+            services.AddScoped<IRepositoryUser, RepositoryUser>();
+            services.AddScoped<IRepositoryAccount, RepositoryAccount>();
+            services.AddScoped<IRepositoryTransaction, RepositoryTransaction>();
+            services.AddScoped<IRepositoryCustomer, RepositoryCustomer>();
+            services.AddScoped<IRepositoryBase<User>, RepositoryBase<User>>();
+            services.AddScoped<IRepositoryBase<Account>, RepositoryBase<Account>>();
+            services.AddScoped<IRepositoryBase<Transaction>, RepositoryBase<Transaction>>();
+            services.AddScoped<IRepositoryBase<Customer>, RepositoryBase<Customer>>();
             services.AddScoped<Core.Abstractions.Logging.ILogger, Core.Abstractions.Logging.Logger>();
         }
     }

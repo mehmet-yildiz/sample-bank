@@ -7,7 +7,7 @@ namespace SampleBank.Business
 {
     public class BusinessTransaction : BusinessBase<Transaction>, IBusinessTransaction
     {
-        public BusinessTransaction(IPersistenceBase<Transaction> persistence, IUnitOfWork uow, ILogger logger) : base(persistence, uow, logger)
+        public BusinessTransaction(IRepositoryBase<Transaction> persistence, IUnitOfWork uow, ILogger logger) : base(persistence, uow, logger)
         {
         }
     }

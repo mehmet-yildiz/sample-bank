@@ -2,7 +2,7 @@
 
 namespace SampleBank.Core.Abstractions.Persistence
 {
-    public interface IPersistenceTransaction : IPersistenceBase<Transaction>
+    public interface IRepositoryTransaction : IRepositoryBase<Transaction>
     {
         void CreateNewCreditRequest(int accountId, decimal initialCredit);
     }

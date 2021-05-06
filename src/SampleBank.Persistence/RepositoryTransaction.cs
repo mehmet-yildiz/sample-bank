@@ -5,9 +5,9 @@ using SampleBank.Core.Enums;
 
 namespace SampleBank.Persistence
 {
-    public class PersistenceTransaction : PersistenceBase<Transaction>, IPersistenceTransaction
+    public class RepositoryTransaction : RepositoryBase<Transaction>, IRepositoryTransaction
     {
-        public PersistenceTransaction(IRepository persistence) : base(persistence)
+        public RepositoryTransaction(IRepository persistence) : base(persistence)
         {
         }
 

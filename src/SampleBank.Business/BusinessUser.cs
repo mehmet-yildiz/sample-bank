@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using SampleBank.Core.Abstractions.Business;
 using SampleBank.Core.Abstractions.Logging;
 using SampleBank.Core.Abstractions.Persistence;
@@ -11,7 +10,7 @@ namespace SampleBank.Business
 {
     public class BusinessUser : BusinessBase<User>, IBusinessUser
     {
-        public BusinessUser(IPersistenceBase<User> persistence, IUnitOfWork uow, ILogger logger) : base(persistence, uow, logger)
+        public BusinessUser(IRepositoryBase<User> persistence, IUnitOfWork uow, ILogger logger) : base(persistence, uow, logger)
         {
         }
 
@@ -21,11 +20,9 @@ namespace SampleBank.Business
             username = username?.Trim();
             password = password?.Trim();
 
-            var user = Persistence.GetAll().FirstOrDefault(x => x.Username == username);
+            var user = Repository.GetAll().FirstOrDefault(x => x.Username == username);
             if (user == null)
             {
-                var guid = Guid.NewGuid();
-                Logger.LogError("UserIsNull");
                 response.ErrorMessage = "UserIsNull";
                 return response;
             }

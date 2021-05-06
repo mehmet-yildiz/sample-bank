@@ -34,6 +34,9 @@
                 Common.CloseModal("loginModal");
                 document.getElementById("username").value = "";
                 document.getElementById("password").value = "";
+
+                document.getElementById("btnLogin").innerText = "Token found in Local Storage";
+                document.getElementById("btnLogin").setAttribute('disabled', 'disabled');
             }
         });
     });

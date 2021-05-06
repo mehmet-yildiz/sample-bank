@@ -25,7 +25,7 @@ namespace SampleBank.API.Controllers
             if (serviceResponse.HasError || serviceResponse.Data == null)
             {
                 response.ErrorMessage = "Username or password is not valid!";
-                return BadRequest(response);
+                return Ok(response);
             }
             //var claims = _authService.GetClaims(user);
             var result = _tokenHelper.CreateToken(serviceResponse.Data, null);
@@ -35,7 +35,7 @@ namespace SampleBank.API.Controllers
                 return Ok(response);
             }
             response.ErrorMessage = "Unexpected error!";
-            return BadRequest(response);
+            return Ok(response);
         }
     }
 }

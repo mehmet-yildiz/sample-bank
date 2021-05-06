@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using SampleBank.Core.Abstractions.Persistence;
+using SampleBank.Persistence.Extensions;
 
 namespace SampleBank.Persistence.EF
 {
@@ -37,9 +39,9 @@ namespace SampleBank.Persistence.EF
             SetState(entity, EntityState.Deleted);
         }
 
-        public IQueryable<T> Select<T>() where T : class, new()
+        public IQueryable<T> Select<T>(params Expression<Func<T, object>>[] includes) where T : class, new()
         {
-            return Set<T>().AsNoTracking();
+            return Set<T>().IncludeMultiple(includes).AsNoTracking();
         }
         
         public IList<T> Query<T>(string spNameOrSql, IDictionary<string, object> args = null, bool rawSql = false) where T : class, new()

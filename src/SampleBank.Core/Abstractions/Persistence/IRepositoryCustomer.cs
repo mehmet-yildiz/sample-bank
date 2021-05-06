@@ -2,7 +2,7 @@
 
 namespace SampleBank.Core.Abstractions.Persistence
 {
-    public interface IPersistenceAccount : IPersistenceBase<Account>
+    public interface IRepositoryCustomer : IRepositoryBase<Customer>
     {
     }
 }

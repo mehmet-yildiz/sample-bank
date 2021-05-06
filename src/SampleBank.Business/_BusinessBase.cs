@@ -10,13 +10,13 @@ namespace SampleBank.Business
 {
     public class BusinessBase<TEntity> : IBusinessBase<TEntity> where TEntity : class, IEntityKey<int>, new()
     {
-        protected readonly IPersistenceBase<TEntity> Persistence;
+        protected readonly IRepositoryBase<TEntity> Repository;
         protected readonly IUnitOfWork Uow;
         protected readonly ILogger Logger;
 
-        public BusinessBase(IPersistenceBase<TEntity> persistence, IUnitOfWork uow, ILogger logger)
+        public BusinessBase(IRepositoryBase<TEntity> persistence, IUnitOfWork uow, ILogger logger)
         {
-            Persistence = persistence;
+            Repository = persistence;
             Uow = uow;
             Logger = logger;
         }
@@ -26,7 +26,7 @@ namespace SampleBank.Business
             var response = new ServiceResponse<TEntity>();
             try
             {
-                response.Data = Persistence.Insert(obj);
+                response.Data = Repository.Insert(obj);
             }
             catch (Exception ex)
             {
@@ -40,7 +40,7 @@ namespace SampleBank.Business
             var response = new ServiceResponse<TEntity>();
             try
             {
-                response.Data = Persistence.Update(obj);
+                response.Data = Repository.Update(obj);
             }
             catch (Exception ex)
             {
@@ -55,7 +55,7 @@ namespace SampleBank.Business
             var response = new ServiceResponse<bool>();
             try
             {
-                Persistence.Delete(obj);
+                Repository.Delete(obj);
                 response.Data = true;
             }
             catch (Exception ex)
@@ -71,7 +71,7 @@ namespace SampleBank.Business
             var response = new ServiceResponse<TEntity>();
             try
             {
-                response.Data = Persistence.GetById(id);
+                response.Data = Repository.GetById(id);
             }
             catch (Exception ex)
             {
@@ -86,7 +86,7 @@ namespace SampleBank.Business
             var response = new ServiceResponse<IEnumerable<TEntity>>();
             try
             {
-                response.Data = Persistence.GetAll();
+                response.Data = Repository.GetAll();
             }
             catch (Exception ex)
             {
