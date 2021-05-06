@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using SampleBank.Core.Entity;
-using SampleBank.Persistence.Extensions;
+using System.Linq;
 
 namespace SampleBank.Persistence.EF
 {
@@ -9,7 +10,7 @@ namespace SampleBank.Persistence.EF
         public EfContext(DbContextOptions<EfContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<Account> Accounts { get; set; }
@@ -21,8 +22,15 @@ namespace SampleBank.Persistence.EF
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //database must be unique for repository tests. therefore storename is checked.
+            var storeName = ((Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal.InMemoryOptionsExtension)
+                optionsBuilder.Options.Extensions.FirstOrDefault(x =>
+                    x.GetType() ==
+                    typeof(Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal.
+                        InMemoryOptionsExtension)))?.StoreName;
+
             //allows Entity Framework Core to be used with an in-memory database (for testing purpose)
-            optionsBuilder.UseInMemoryDatabase("SampleBankInMemoryDatabase");
+            optionsBuilder.UseInMemoryDatabase(storeName ?? "SampleBankInMemoryDatabase");
         }
     }
 }
