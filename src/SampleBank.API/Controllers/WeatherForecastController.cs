@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using SampleBank.Core.Abstractions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +19,11 @@ namespace SampleBank.API.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger _logger;
 
         private readonly IBusinessUser _userBusiness;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IBusinessUser userBusiness)
+        public WeatherForecastController(ILogger logger, IBusinessUser userBusiness)
         {
             _logger = logger;
             _userBusiness = userBusiness;

@@ -21,9 +21,15 @@ namespace SampleBank.Application
             services.AddScoped<IUnitOfWork, EfUnitOfWork>();
 
             services.AddScoped<DbContext, EfContext>();
+            services.AddScoped<IPersistenceUser, PersistenceUser>();
+            services.AddScoped<IPersistenceAccount, PersistenceAccount>();
+            services.AddScoped<IPersistenceTransaction, PersistenceTransaction>();
+            services.AddScoped<IPersistenceCustomer, PersistenceCustomer>();
             services.AddScoped<IPersistenceBase<User>, PersistenceBase<User>>();
             services.AddScoped<IPersistenceBase<Account>, PersistenceBase<Account>>();
             services.AddScoped<IPersistenceBase<Transaction>, PersistenceBase<Transaction>>();
+            services.AddScoped<IPersistenceBase<Customer>, PersistenceBase<Customer>>();
+            services.AddScoped<Core.Abstractions.Logging.ILogger, Core.Abstractions.Logging.Logger>();
         }
     }
 }

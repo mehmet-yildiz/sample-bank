@@ -6,8 +6,6 @@ using SampleBank.Core.Abstractions.Business;
 
 namespace SampleBank.API.Controllers
 {
-    [Route("[controller]")]
-    [ApiController]
     public class AuthController : BaseController
     {
         private readonly IBusinessUser _authService;

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using SampleBank.Core.Entity;
+using SampleBank.Core.Enums;
 using SampleBank.Core.Helpers;
 
 namespace SampleBank.Persistence.Extensions
@@ -56,10 +57,10 @@ namespace SampleBank.Persistence.Extensions
                 CustomerId = customer2.Id
             };
 
-            var transaction1 = new Transaction { Id = 1, ProcessName = "MoneyTransfer", ProcessDate = DateTime.Now, AccountId = 2 };
-            var transaction2 = new Transaction { Id = 2, ProcessName = "MoneyTransfer", ProcessDate = DateTime.Now, AccountId = 2 };
-            var transaction3 = new Transaction { Id = 3, ProcessName = "Swift", ProcessDate = DateTime.Now, AccountId = 2 };
-            var transaction4 = new Transaction { Id = 4, ProcessName = "Payment", ProcessDate = DateTime.Now, AccountId = 2 };
+            var transaction1 = new Transaction { Id = 1, TransactionProcess = ProcessesType.Check, ProcessDate = DateTime.Now, AccountId = 2 };
+            var transaction2 = new Transaction { Id = 2, TransactionProcess = ProcessesType.Payment, ProcessDate = DateTime.Now, AccountId = 2 };
+            var transaction3 = new Transaction { Id = 3, TransactionProcess = ProcessesType.Transfer, ProcessDate = DateTime.Now, AccountId = 2 };
+            var transaction4 = new Transaction { Id = 4, TransactionProcess = ProcessesType.Swift, ProcessDate = DateTime.Now, AccountId = 2 };
 
             modelBuilder.Entity<User>().HasData(user1);
             modelBuilder.Entity<Customer>().HasData(customer1, customer2);
