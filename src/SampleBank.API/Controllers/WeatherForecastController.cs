@@ -3,17 +3,16 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using SampleBank.API.Model;
 using SampleBank.Core.Abstractions.Business;
 using SampleBank.Core.Entity;
 
 namespace SampleBank.API.Controllers
 {
-    [Authorize]
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : SecureController
     {
         private static readonly string[] Summaries = new[]
         {
@@ -31,16 +30,19 @@ namespace SampleBank.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public ApiResponse<IEnumerable<WeatherForecast>> Get()
         {
+            var response = new ApiResponse<IEnumerable<WeatherForecast>>();
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var items =  Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+            response.Data = items;
+            return response;
         }
     }
 }

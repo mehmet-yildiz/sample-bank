@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using SampleBank.Core.Abstractions.Business;
+using SampleBank.Core.Abstractions.Logging;
 using SampleBank.Core.Abstractions.Persistence;
 using SampleBank.Core.Entity;
+using SampleBank.Core.Model;
 
 namespace SampleBank.Business
 {
@@ -10,50 +12,107 @@ namespace SampleBank.Business
     {
         protected readonly IPersistenceBase<TEntity> Persistence;
         protected readonly IUnitOfWork Uow;
-        public BusinessBase(IPersistenceBase<TEntity> persistence, IUnitOfWork uow)
+        protected readonly ILogger Logger;
+
+        public BusinessBase(IPersistenceBase<TEntity> persistence, IUnitOfWork uow, ILogger logger)
         {
             Persistence = persistence;
             Uow = uow;
+            Logger = logger;
         }
 
-        public TEntity Insert(TEntity obj)
+        public ServiceResponse<TEntity> Insert(TEntity obj)
         {
-            return Persistence.Insert(obj);
+            var response = new ServiceResponse<TEntity>();
+            try
+            {
+                response.Data = Persistence.Insert(obj);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                response.ErrorMessage = "GeneralInsertError";
+            }
+            return response;
         }
-        public TEntity Update(TEntity obj)
+        public ServiceResponse<TEntity> Update(TEntity obj)
         {
-            return Persistence.Update(obj);
+            var response = new ServiceResponse<TEntity>();
+            try
+            {
+                response.Data = Persistence.Update(obj);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                response.ErrorMessage = "GeneralUpdateError";
+            }
+            return response;
         }
 
-        public void Delete(TEntity obj)
+        public ServiceResponse<bool> Delete(TEntity obj)
         {
-            Persistence.Delete(obj);
+            var response = new ServiceResponse<bool>();
+            try
+            {
+                Persistence.Delete(obj);
+                response.Data = true;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                response.ErrorMessage = "GeneralDeleteError";
+            }
+            return response;
         }
 
-        public TEntity GetById(int id)
+        public ServiceResponse<TEntity> GetById(int id)
         {
-            return Persistence.GetById(id);
+            var response = new ServiceResponse<TEntity>();
+            try
+            {
+                response.Data = Persistence.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                response.ErrorMessage = "GeneralGetByIdError";
+            }
+            return response;
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public ServiceResponse<IEnumerable<TEntity>> GetAll()
         {
-            return Persistence.GetAll();
+            var response = new ServiceResponse<IEnumerable<TEntity>>();
+            try
+            {
+                response.Data = Persistence.GetAll();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                response.ErrorMessage = "GeneralGetAllError";
+            }
+            return response;
         }
 
-        public bool TransactionalProcess(Action action)
+        public ServiceResponse<bool> TransactionalProcess(Action action)
         {
+            var response = new ServiceResponse<bool>();
             try
             {
                 Uow.BeginTransaction();
                 action();
                 Uow.Commit();
-                return true;
+                response.Data = true;
             }
-            catch
+            catch (Exception ex)
             {
                 Uow.Rollback();
-                throw;
+                Logger.LogError(ex);
+                response.ErrorMessage = "GeneralTransactionalProcessError";
             }
+            return response;
         }
     }
 }

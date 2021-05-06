@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SampleBank.API.Model;
+using SampleBank.API.Model.Auth;
 using SampleBank.API.Model.JWT;
 using SampleBank.Core.Abstractions.Business;
 
 namespace SampleBank.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : BaseController
     {
         private readonly IBusinessUser _authService;
         private readonly ITokenHelper _tokenHelper;
@@ -21,19 +22,22 @@ namespace SampleBank.API.Controllers
         [HttpPost("login")]
         public ActionResult Login(LoginModel loginModel)
         {
-            var user = _authService.AuthenticateUser(loginModel.Username, loginModel.Password);
-            if (user == null)
+            var response = new ApiResponse<AccessToken>();
+            var serviceResponse = _authService.AuthenticateUser(loginModel.Username, loginModel.Password);
+            if (serviceResponse.HasError || serviceResponse.Data == null)
             {
-                return BadRequest();
+                response.ErrorMessage = "Username or password is not valid!";
+                return BadRequest(response);
             }
             //var claims = _authService.GetClaims(user);
-            var result = _tokenHelper.CreateToken(user, null);
+            var result = _tokenHelper.CreateToken(serviceResponse.Data, null);
             if (result != null)
             {
-                return Ok(result);
+                response.Data = result;
+                return Ok(response);
             }
-
-            return BadRequest((AccessToken)null);
+            response.ErrorMessage = "Unexpected error!";
+            return BadRequest(response);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace SampleBank.API.Model
+﻿namespace SampleBank.API.Model.Auth
 {
     public class LoginModel
     {
