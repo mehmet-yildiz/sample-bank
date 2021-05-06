@@ -31,6 +31,9 @@
                     successCallback(data);
                 }
             }
+            else if (this.status == 401) {
+                alert("try to login first! Please refresh page before login");
+            }
         };
         request.onerror = function (err) {
             alert("An error occured!");

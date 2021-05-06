@@ -24,11 +24,5 @@ namespace SampleBank.Persistence.EF
             //allows Entity Framework Core to be used with an in-memory database (for testing purpose)
             optionsBuilder.UseInMemoryDatabase("SampleBankInMemoryDatabase");
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.SeedInMemoryData(); //creates sample data for testing
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

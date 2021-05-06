@@ -1,11 +1,50 @@
 ﻿(function () {
 
+    //check local storage has token. If it has it, then login button is disabled. --If it hasn't it, all buttons have needsToken class are disabled to prevent tokenfree request.
     if (localStorage.getItem("sampleBankToken")) {
         document.getElementById("btnLogin").innerText = "Token found in Local Storage";
         document.getElementById("btnLogin").setAttribute('disabled', 'disabled');
-    } 
+    }
 
+    //first checks the generated data. if yes, then makes generate button disable
+    Common.Ajax("get", "auth/check", null, function (apiResponse) {
 
+        if (apiResponse.hasError === true) {
+            alert("An error occured. " + apiResponse.errorMessage);
+            return;
+        }
+
+        if (apiResponse.data === true) {
+            document.querySelectorAll(".btn").forEach((function (el) { el.removeAttribute('disabled'); }));
+            document.getElementById("btnGenerateData").setAttribute('disabled', 'disabled');
+        }
+        else {
+            document.getElementById("btnGenerateData").removeAttribute('disabled');
+        }
+    });
+
+    //generate data for EF (in-memory)
+    document.getElementById("btnGenerateData").addEventListener('click', function (e) {
+        const thisBtn = this;
+
+        Common.Ajax("post", "auth/generateData", null, function (apiResponse) {
+
+            if (apiResponse.hasError === true) {
+                alert("An error occured. " + apiResponse.errorMessage);
+                return;
+            }
+
+            if (apiResponse.data === true) {
+                thisBtn.innerText = "Generate Data";
+                thisBtn.setAttribute('disabled', 'disabled');
+            }
+            else {
+                alert("Reload page and try again!");
+            }
+        });
+    });
+
+    //login operations
     document.getElementById('login-button').addEventListener('click', function (e) {
         this.innerText = "Please wait...";
         this.setAttribute('disabled', 'disabled');
@@ -29,18 +68,17 @@
                 return;
             }
 
+            //sets token to local storage and resets elements
             if (apiResponse.data?.token != null) {
                 localStorage.setItem("sampleBankToken", apiResponse.data.token);
                 Common.CloseModal("loginModal");
                 document.getElementById("username").value = "";
                 document.getElementById("password").value = "";
-
-                document.getElementById("btnLogin").innerText = "Token found in Local Storage";
-                document.getElementById("btnLogin").setAttribute('disabled', 'disabled');
             }
         });
     });
 
+    //opens account. if initialCredit is higher than zero then a transaction is created.
     document.getElementById('btnOpenAccount').addEventListener('click', function (e) {
         this.innerText = "Please wait...";
         this.setAttribute('disabled', 'disabled');
@@ -74,7 +112,7 @@
         });
     });
 
-
+    //shows all customers in json 
     document.getElementById('btnShowCustomers').addEventListener('click', function (e) {
         this.innerText = "Please wait...";
         this.setAttribute('disabled', 'disabled');
@@ -93,6 +131,7 @@
     });
 
 
+    //shows all accounts in json 
     document.getElementById('btnShowAccounts').addEventListener('click', function (e) {
         this.innerText = "Please wait...";
         this.setAttribute('disabled', 'disabled');
@@ -111,6 +150,7 @@
     });
 
 
+    //shows all transactions in json 
     document.getElementById('btnShowTransactions').addEventListener('click', function (e) {
         this.innerText = "Please wait...";
         this.setAttribute('disabled', 'disabled');
@@ -128,6 +168,3 @@
         });
     });
 })();
-
-
-
