@@ -1,5 +1,5 @@
 # sample-bank
 a sample for assessment
 
-Clone and run both API and MVC projects.
-Before Login, Open Accounts, Get Customer Info buttons, click Generate Data for generating sample data.
+Clone and run both <strong>API</strong> and <strong>MVC</strong> projects. <br/>
+Before <strong>Login</strong>, <strong>Open Accounts</strong>, <strong>Get Customer Info</strong> buttons, click <strong>Generate Data</strong> for generating sample data.
