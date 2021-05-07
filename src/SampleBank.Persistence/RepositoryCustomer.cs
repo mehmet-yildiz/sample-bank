@@ -7,7 +7,6 @@ namespace SampleBank.Persistence
     {
         public RepositoryCustomer(IRepository persistence) : base(persistence)
         {
-
         }
     }
 }

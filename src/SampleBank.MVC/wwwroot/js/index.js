@@ -112,6 +112,26 @@
         });
     });
 
+    document.getElementById('btnGetCustomerInfo').addEventListener('click', function (e) {
+        const thisBtn = this;
+
+        const id = Math.floor(Math.random() * 2) + 1 ; //random customer Id between 1 and 2 
+
+        Common.Ajax("get", "customer/info?id="+ id, null, function (apiResponse) {
+            thisBtn.innerText = "Get Customer Info (Random)";
+            thisBtn.removeAttribute('disabled');
+            if (apiResponse.hasError === true) {
+                alert("An error occured. " + apiResponse.errorMessage);
+                return;
+            }
+
+            //sets token to local storage and resets elements
+            if (apiResponse.data != null) {
+                document.getElementById("result-section").innerText = "Customer Info: " + JSON.stringify(apiResponse.data, null, "\t");
+            }
+        });
+    });
+
     //shows all customers in json 
     document.getElementById('btnShowCustomers').addEventListener('click', function (e) {
         this.innerText = "Please wait...";
