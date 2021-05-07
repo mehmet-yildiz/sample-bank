@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace SampleBank.Persistence.EF
 {
-    public sealed class EfContext : DbContext
+    public class EfContext : DbContext
     {
         public EfContext(DbContextOptions<EfContext> options)
             : base(options)
@@ -13,12 +13,12 @@ namespace SampleBank.Persistence.EF
             //Database.EnsureCreated();
         }
 
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Claim> Claims { get; set; }
-        public DbSet<UserClaim> UserClaims { get; set; }
-        public DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Claim> Claims { get; set; }
+        public virtual DbSet<UserClaim> UserClaims { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
