@@ -33,6 +33,7 @@ namespace SampleBank.Business
                 {
                     Logger.LogError("CustomerNotFound");
                     errorMessage = "CustomerNotFound";
+                    return;
                 }
 
                 var account = new Account { CustomerId = model.CustomerId, InitialCredit = model.InitialCredit};

@@ -10,23 +10,19 @@ namespace SampleBank.Core.Abstractions.Logging
         }
 
         public void LogError(string msg)
-        {
-            throw new NotImplementedException();
+        { 
         }
 
         public void LogError(Exception ex)
         {
-            throw new NotImplementedException();
         }
 
         public void LogWarning(string msg)
         {
-            throw new NotImplementedException();
         }
 
         public void LogInformation(string msg)
         {
-            throw new NotImplementedException();
         }
     }
 }
